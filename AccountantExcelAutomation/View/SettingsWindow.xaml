@@ -1,0 +1,180 @@
+﻿<Window x:Class="AccountantExcelAutomation.View.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccountantExcelAutomation.View"
+        mc:Ignorable="d"
+        Title="ExcelAuto Settings Window" Height="450" Width="500" WindowStartupLocation="CenterOwner" SizeToContent="Height" Closing="Window_Closing" ResizeMode="NoResize" Icon="/Source/excel.png">
+    <Window.Resources>
+        <Style x:Key="Base">
+            <Style.Setters>
+                <Setter Property="FrameworkElement.Margin" Value="10 8 10 8"></Setter>
+                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Center"></Setter>
+                <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="FrameworkElement.Height" Value="20"></Setter>
+                <Setter Property="ItemsControl.FontSize" Value="15"></Setter>
+                <Setter Property="ItemsControl.FontWeight" Value="Bold"></Setter>
+                <Setter Property="ItemsControl.Padding" Value="0 0 0 0"></Setter>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ToButtons" BasedOn="{StaticResource ResourceKey=Base}">
+            <Style.Setters>
+                <Setter Property="FrameworkElement.Width" Value="100"></Setter>
+            </Style.Setters>
+        </Style>
+
+        <Style x:Key="ToAllElements" BasedOn="{StaticResource ResourceKey=Base}">
+            <Style.Setters>
+                <Setter Property="ItemsControl.Opacity" Value="0.8"></Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.IsFocused" Value="True">
+                    <Setter Property="ItemsControl.Opacity" Value="1"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.IsMouseOver" Value="True">
+                    <Setter Property="ItemsControl.Opacity" Value="1"></Setter>
+                    <Setter Property="ItemsControl.Background" Value="White"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ToTextBox" BasedOn="{StaticResource ResourceKey=ToAllElements}">
+            <Style.Setters>
+                <Setter Property="ItemsControl.Foreground" Value="DimGray"></Setter>
+                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"></Setter>
+                <Setter Property="ItemsControl.VerticalContentAlignment" Value="Center"></Setter>
+                <Setter Property="ItemsControl.Padding" Value="5 0 5 0"></Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.IsFocused" Value="True">
+                    <Setter Property="ItemsControl.Foreground" Value="Black"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.IsMouseOver" Value="True">
+                    <Setter Property="ItemsControl.Foreground" Value="Black"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ListBoxItems" BasedOn="{StaticResource ResourceKey=Base}">
+            <Style.Setters>
+                <Setter Property="ListBoxItem.Margin" Value="5 1 5 1"></Setter>
+                <Setter Property="FrameworkElement.Width" Value="auto"></Setter>
+                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"></Setter>
+                <Setter Property="ItemsControl.FontSize" Value="12"></Setter>
+                <Setter Property="ItemsControl.FontWeight" Value="Normal"></Setter>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid x:Name="MainElementsGrid" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Email address of the account in the Outlook application" Style="{StaticResource ResourceKey=Base}"/>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <TextBox x:Name="EmailAddress"  Text="Enter email address..." Style="{StaticResource ResourceKey=ToTextBox}" LostFocus="EmailAddress_LostFocus" GotFocus="EmailAddress_GotFocus" KeyDown="TextBox_KeyDown"/>
+                <Popup x:Name="EmailAddressPopup" Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource ResourceKey=Base}" Opened="EmailAddressPopup_Opened" StaysOpen="False" Placement="Bottom" PlacementTarget="{Binding ElementName=EmailAddress}" >
+                    <Label Content="Incorrect email address!" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}" Padding="1,1,1,1"  ></Label>
+                </Popup>
+            </Grid>
+
+
+            <Label Grid.Row="2" Grid.Column="0" Content="Mail title" Style="{StaticResource ResourceKey=Base}" />
+            <TextBox x:Name="MailTitle" Grid.Row="2" Grid.Column="1" Text="Enter mail title" Style="{StaticResource ResourceKey=ToTextBox}" LostFocus="MailTitle_LostFocus" KeyDown="TextBox_KeyDown" />
+
+            <Label Grid.Row="3" Grid.Column="0" Content="Mail text" Style="{StaticResource ResourceKey=Base}" />
+            <TextBox x:Name="MailText" Grid.Row="3" Grid.Column="1" Text="Enter mail text" Style="{StaticResource ResourceKey=ToTextBox}" LostFocus="MailText_LostFocus" KeyDown="TextBox_KeyDown" />
+
+            <Label Grid.Row="4" Grid.Column="0" Content="Attached file name" Style="{StaticResource ResourceKey=Base}" />
+            <TextBox x:Name="AttachedFileName" Grid.Row="4" Grid.Column="1" Text="Enter file name" Style="{StaticResource ResourceKey=ToTextBox}" LostFocus="AttachedFileName_LostFocus" KeyDown="TextBox_KeyDown" />
+
+            <Label Grid.Row="5" Grid.Column="0" Content="Attached file extension" Style="{StaticResource ResourceKey=Base}"/>
+            <ComboBox x:Name="AttachedFileExtension" Grid.Row="5" Grid.Column="1" Style="{StaticResource ResourceKey=ToTextBox}" Text="Select file extention" SelectionChanged="AttachedFileExtension_SelectionChanged" />
+
+            <Label Grid.Row="6" Content="Start trigger value" Style="{StaticResource ResourceKey=Base}" />
+            <TextBox x:Name="StartTrigger" Grid.Row="6" Grid.Column="1" Text="Enter start trigger" Style="{StaticResource ResourceKey=ToTextBox}" LostFocus="StartTrigger_LostFocus" KeyDown="TextBox_KeyDown" />
+
+            <Label Grid.Row="7" Content="End trigger value" Style="{StaticResource ResourceKey=Base}" />
+            <TextBox x:Name="EndTrigger" Grid.Row="7" Grid.Column="1"  Text="Enter end trigger" Style="{StaticResource ResourceKey=ToTextBox}" LostFocus="EndTrigger_LostFocus" KeyDown="TextBox_KeyDown" />
+
+            <Grid x:Name="ReceiversListGrid" Grid.Row="8" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="Delete" Grid.Column="0" Grid.Row="0" Content="Delete" Style="{StaticResource ResourceKey=ToButtons}" Click="Delete_Click"  />
+                <Button x:Name="Update" Grid.Column="1" Grid.Row="0" Content="Update" Style="{StaticResource ResourceKey=ToButtons}" Click="Update_Click"  />
+                <Button x:Name="Add" Grid.Column="2" Grid.Row="0" Content="Add" Style="{StaticResource ResourceKey=ToButtons}" Click="Add_Click"  />
+
+                <TextBlock x:Name="IDTextBlock" Grid.Column="0" Grid.Row="1" Text="ID" Style="{StaticResource ResourceKey=Base}" Height="20" Margin="0,0,0,0" />
+                <TextBlock x:Name="UpdateTextBlock" Grid.Column="1" Grid.Row="1" Text="Name" Style="{StaticResource ResourceKey=Base}" Height="20" Margin="15,0,0,0" HorizontalAlignment="Left" />
+                <TextBlock x:Name="AddTextBlock" Grid.Column="2" Grid.Row="1" Text="Email address" Style="{StaticResource ResourceKey=Base}" Height="20" Margin="15,0,0,0" HorizontalAlignment="Left" />
+
+                <ListBox x:Name="ReceiversList" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="238" >
+                    <ListBox.ItemTemplate >
+                        <DataTemplate>
+                            <Grid Width="450">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="114" ></ColumnDefinition>
+                                    <ColumnDefinition Width="1*" ></ColumnDefinition>
+                                    <ColumnDefinition Width="1.5*" ></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" Style="{StaticResource ResourceKey=ListBoxItems}" Text="{Binding  Path=ID, Mode=TwoWay}" HorizontalAlignment="Center" />
+                                <TextBlock Grid.Column="1" Style="{StaticResource ResourceKey=ListBoxItems}" Text="{Binding  Path=Name, Mode=TwoWay}" />
+                                <TextBlock Grid.Column="2" Style="{StaticResource ResourceKey=ListBoxItems}" Text="{Binding  Path=EAddress, Mode=TwoWay}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
+
+        <Grid x:Name="ReceiverEditorGrid" Visibility="Hidden" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" MinWidth="50"/>
+                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock x:Name="ReceiverIDEditor" Grid.Column="0" Grid.Row="0" Text="-" TextAlignment="Center" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" />
+            <TextBox x:Name="ReceiverNameEditor" Grid.Column="1" Grid.Row="0" Text="Enter receiver name..." Style="{Binding Mode=OneWay, Source={StaticResource ToTextBox}}" LostFocus="ReceiverNameEditor_LostFocus" GotFocus="ReceiverNameEditor_GotFocus" KeyDown="ReceiverTextBoxEditor_KeyDown"/>
+            <TextBox x:Name="ReceiverEmailAddress" Grid.Column="2" Grid.Row="0" Text="Enter receiver email address..." Style="{Binding Mode=OneWay, Source={StaticResource ToTextBox}}" LostFocus="ReceiverEmailAddress_LostFocus" GotFocus="ReceiverEmailAddress_GotFocus" KeyDown="ReceiverTextBoxEditor_KeyDown"/>
+            <Button x:Name="Operate_button" Grid.Column="2" Grid.Row="1" Content="Operate" Style="{Binding Mode=OneWay, Source={StaticResource ToButtons}}" Padding="0,-2,0,0" Click="Operate_button_Click" LostFocus="Operate_button_LostFocus"/>
+            <Button x:Name="Cancel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Content="Cancel" Style="{Binding Mode=OneWay, Source={StaticResource ToButtons}}" Padding="0,-2,0,0" Click="Cancel_Click"/>
+
+        </Grid>
+        <TextBlock x:Name="Warnings" Margin="0,320,0,0" VerticalAlignment="Top" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" TextWrapping="Wrap" Height="Auto" TextAlignment="Center" Visibility="Hidden"><Run Text="Name or email is not valid"/><LineBreak/><Run Text="Name must start with a letter"/><LineBreak/><Run Text="Check your email"/></TextBlock>
+    </Grid>
+</Window>

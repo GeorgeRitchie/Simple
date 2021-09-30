@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>_base</id>
+    <version>1.0.0</version>
+    <authors>_base</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="System.Drawing.Common" version="5.0.2" exclude="Build,Analyzers" />
+        <dependency id="TaskScheduler" version="2.9.1" exclude="Build,Analyzers" />
+        <dependency id="TaskSchedulerEditor" version="2.9.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\George Ritchie\source\SRP - Practice\AccountantExcelAutomatization\AccountantExcelAutomatization\base\bin\Debug\netcoreapp3.1\_base.dll" target="lib\netcoreapp3.1\_base.dll" />
+  </files>
+</package>

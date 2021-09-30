@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>_base</name>
+    </assembly>
+    <members>
+        <member name="T:_base.MainExcelController">
+            <summary>
+            Main Class with basic API
+            </summary>
+        </member>
+        <member name="M:_base.MainExcelController.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:_base.MainExcelController.GetWorkbookSheetsNames(System.String)">
+            <summary>
+            Opens given excel file, gets all sheets and returns their names.
+            </summary>
+            <param name="ExcelFileName">Excel file further operations.</param>
+            <returns>List of found sheets' names</returns>
+        </member>
+        <member name="M:_base.MainExcelController.SetChoosenSheetName(System.String)">
+            <summary>
+            Sets choosen sheet to get receivers' names by <see cref="M:_base.MainExcelController.GetReceiversNames"/> and create required data by <see cref="M:_base.MainExcelController.MakeMailObjectsFromReceiversData"/>
+            </summary>
+            <exception cref="T:System.ArgumentException">This exception will be thrown if parameter SheetName is <see cref="!:null"/>, empty ("") or is not given by <see cref="M:_base.MainExcelController.GetWorkbookSheetsNames(System.String)"/></exception>
+            <param name="SheetName">Choosen sheet name. Sheet's name must be one of names given by <see cref="M:_base.MainExcelController.GetWorkbookSheetsNames(System.String)"/>.</param>
+        </member>
+        <member name="M:_base.MainExcelController.GetReceiversNames">
+            <summary>
+            Gets names of all receivers found in choosen sheet.
+            </summary>
+            <returns>Names of all receivers in choosen sheet</returns>
+        </member>
+        <member name="M:_base.MainExcelController.SetSelectedReceivers(System.Collections.Generic.List{System.String})">
+            <summary>
+            Sets selected receivers for creating required files and other data for mails in method <see cref="M:_base.MainExcelController.MakeMailObjectsFromReceiversData"/>.
+            </summary>
+            <param name="receivers">List of receivers that are choosen from total amount of receivers.</param>
+        </member>
+        <member name="M:_base.MainExcelController.CloseApp">
+            <summary>
+            Cleses excel application with all opened files.
+            </summary>
+        </member>
+        <member name="M:_base.MainExcelController.MakeMailObjectsFromReceiversData">
+            <summary>
+            Creates files and other required data for mails of receivers.
+            </summary>
+        </member>
+        <member name="M:_base.MainExcelController.SendNow(System.Int64)">
+            <summary>
+            Sends mails to receivers now. If sending mails are deffered sending, give as a parameter it's ID.
+            If sending mails are simple sending, skip parameter.
+            </summary>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <exception cref="T:_base.Exceptions.MailSendException"></exception>
+            <param name="deferredMailID">ID of deferred mail sending</param>
+        </member>
+        <member name="M:_base.MainExcelController.SendLater(System.DateTime)">
+            <summary>
+            Creates task for sending mails to receivers on specified Date and Time
+            </summary>
+            <exception cref="T:System.ArgumentException"></exception>
+            <exception cref="T:System.InvalidOperationException"></exception>
+            <param name="dateOfSending">Date and Time when mails should be send to receivers</param>
+        </member>
+    </members>
+</doc>

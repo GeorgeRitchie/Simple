@@ -1,0 +1,44 @@
+﻿<Window x:Class="AccountantExcelAutomation.View.WindowsTaskCreateExceptionNotification"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AccountantExcelAutomation.View"
+        mc:Ignorable="d" Height="auto" Width="800" ResizeMode="NoResize" SizeToContent="Height" WindowStartupLocation="CenterOwner" Topmost="True" Unloaded="Window_Unloaded" WindowStyle="None">
+    <Window.Resources>
+        <Style x:Key="Base">
+            <Style.Setters>
+                <Setter Property="FrameworkElement.Height" Value="20"></Setter>
+                <Setter Property="ItemsControl.FontSize" Value="15"></Setter>
+                <Setter Property="ItemsControl.FontWeight" Value="Bold"></Setter>
+                <Setter Property="ItemsControl.Padding" Value="0 0 0 0"></Setter>
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+
+    <Grid MouseLeftButtonDown="_MouseLeftButtonDown">
+        <Grid IsManipulationEnabled="True" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,2,10,2" Text="Program cannot create windows task in 'Windows Task Sheduller'" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" />
+            <TextBlock Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,2,10,2" Text="So you can do that by your self:" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" />
+            <TextBox x:Name="path" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,2,10,2" Text="Program path: " Style="{Binding Mode=OneWay, Source={StaticResource Base}}" Background="Transparent" BorderThickness="0,0,0,0" IsReadOnly="True" TextWrapping="Wrap" MinHeight="20" Height="Auto" />
+            <TextBox x:Name="_params" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,2,10,2" Text="Program params: " Style="{Binding Mode=OneWay, Source={StaticResource Base}}" Background="Transparent" BorderThickness="0,0,0,0" IsReadOnly="True" TextWrapping="Wrap" MinHeight="20" Height="Auto" />
+            <TextBox x:Name="dateTime" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10,2,10,2" Text="Program launch time: " Style="{Binding Mode=OneWay, Source={StaticResource Base}}" Background="Transparent" BorderThickness="0,0,0,0" IsReadOnly="True" TextWrapping="Wrap" MinHeight="20" Height="Auto" />
+            <TextBlock Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,2,10,0" Text="!!!WARNING!!!!" FontWeight="Bold" TextAlignment="Center" Foreground="Red" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" />
+            <TextBlock Grid.Row="6" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,0" Text="If you make mistake in program path or program params, this program will not run." TextAlignment="Center" Foreground="Red" Style="{Binding Mode=OneWay, Source={StaticResource Base}}"  />
+            <TextBlock Grid.Row="7" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,10,2" Text="If you make mistake in launch time, this program will ignore task and will not send mails." Foreground="Red" TextAlignment="Center" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" />
+            <Button Grid.Row="8" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,10,10,12" Content="OK" Style="{Binding Mode=OneWay, Source={StaticResource Base}}" Width="50" Height="25" Click="Button_Click"  />
+        </Grid>
+    </Grid>
+</Window>
